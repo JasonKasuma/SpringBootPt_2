@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Employees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+    <div class="container my-2">
+        <div class="card">
+            <div class="card-body">
+                <div th:switch="${products}" class="container my-5">
+                    <p class="my-5">
+                        <a href="/Product/edit" class="btn btn-primary">
+                            <i class="fas fa-user-plus ml-2"> Add Product </i></a>
+                    </p>
+                    <div class="col-md-10">
+                        <h2 th:case="null">No record found !!</h2>
+                        <div th:case="*">
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                <tr>
+                                    <th>Product's Name</th>
+                                    <th>Product's Price</th>
+                                    <th>Product's Stock</th>
+                                    <th>Uploaded Images</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="product : ${products}">
+                                    <td th:text="${product.namaBarang}"></td>
+                                    <td th:text="${product.hargaBarang}"></td>
+                                    <td th:text="${product.stokBarang}"></td>
+                                    <td>
+                                        <img src="@{../static/UplaodFile/} + ${product.fileName}" width="100"
+                                             th:src="@{UploadFile/} + ${product.fileName}">
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/Product/edit/{kode_barang}(kode_barang=${product.kode_barang})}" class="btn btn-primary">
+                                            <i class="fas fa-user-edit ml-2"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/Product/delete/{kode_barang}(kode_barang=${product.kode_barang})}" class="btn btn-primary">
+                                            <i class="fas fa-user-times ml-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <p class="my-5">
+                    <a href="/MainMenu" class="btn btn-primary"> Main Menu </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

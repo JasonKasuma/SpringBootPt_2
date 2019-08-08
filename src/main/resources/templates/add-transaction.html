@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container my-5">
+    <h3> Add Transaction</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/Transaction/createTransaction}" th:object="${transaction}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="companyname" class="col-form-label">Company's Name</label>
+                            <select th:field="*{perusahaan.kode_perusahaan}">
+                                <option th:each="a :${listCompany}" th:value="${a.kode_perusahaan}" th:text="${a.namaPerusahaan}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="productname" class="col-form-label">Product's Name</label>
+                            <select th:field = "*{product.kode_barang}">
+                                <option th:each="b :${listProduct}" th:value="${b.kode_barang}" th:text="${b.namaBarang}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="quantity" class="col-form-label">Product's Quantity</label>
+                            <input type="text" th:field="*{orderQuantity}" class="form-control"
+                                   id="orderQuantity" placeholder="Product's Quantity" />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value=" Submit ">
+                        </div>
+
+                        <input type="hidden" id="kode_transaksi" th:field="*{kode_transaksi}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
